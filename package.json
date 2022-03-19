@@ -1,0 +1,35 @@
+{
+  "name": "inventory-system",
+  "description": "A simple inventory management application",
+  "author": "Fred Rodolfo",
+  "version": "0.1.0",
+  "private": true,
+  "license": "ISC",
+  "scripts": {
+    "client-start": "cd client && react-scripts start",
+    "client-build": "cd client && react-scripts build",
+    "client-test": "cd client && react-scripts test",
+    "server-start": "cd server && yarn start",
+    "start": "yarn client-start",
+    "bundle": "cp -R ./client/build/ ./dist/client && cp -R ./server/ ./dist/",
+    "build": "mkdir ./dist && yarn client-build && yarn bundle",
+    "install": "cd client && yarn && cd ../server && yarn",
+    "test": "yarn client-test",
+    "eject": "cd client && react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
