@@ -15,6 +15,7 @@
     "build": "mkdir ./dist && yarn client-build && yarn bundle",
     "install": "cd client && yarn && cd ../server && yarn",
     "test": "yarn client-test",
+    "seed": "cd server && yarn seed",
     "eject": "cd client && react-scripts eject"
   },
   "browserslist": {
