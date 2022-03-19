@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Server component",
   "author": "Fred Rodolfo",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "watch": "nodemon index.js",
+    "start": "node app.js",
+    "watch": "nodemon app.js",
     "seed": "node seeds/seed.js"
   },
   "license": "ISC",
