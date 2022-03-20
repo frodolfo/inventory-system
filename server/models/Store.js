@@ -34,6 +34,4 @@ StoreSchema.virtual("totalInventory").get(function () {
   return this.inventory.length;
 });
 
-const Store = mongoose.model("Store", StoreSchema);
-
-module.exports = Store;
+module.exports = mongoose.model("Store", StoreSchema);

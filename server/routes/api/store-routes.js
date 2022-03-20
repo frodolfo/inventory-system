@@ -4,7 +4,6 @@ const db = require("../../models");
 router.get("/", (req, res) => {
   db.Store.find()
     .then((data) => {
-      console.log("GET data: ", data);
       res.json(data);
     })
     .catch((err) => res.json(err));
