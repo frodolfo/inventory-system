@@ -1,19 +1,21 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+// TODO: uncomment out line below once db issue is resolved
 const routes = require("./routes");
 
 const PORT = process.env.PORT || 3001;
+const APP = express();
 
-const app = express();
+APP.use(morgan("dev"));
 
-app.use(morgan("dev"));
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-app.use(express.static("public"));
-app.use(routes);
+APP.use(express.urlencoded({ extended: true }));
+APP.use(express.json());
+// APP.use(express.static("public"));
+// TODO: uncomment out line below once db issue is resolved
+// APP.use(routes);
+// TODO: delete line below once db issue is resolved
+require("./routes/api-routes")(APP);
 
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost/retailstores", {
@@ -24,7 +26,7 @@ mongoose
   })
   .then(() => {
     console.log("MongoDB connected successfully");
-    app.listen(PORT, () => {
-      console.log(`Inventory Manager server is running on port ${PORT}!`);
+    APP.listen(PORT, () => {
+      console.log(`Inventory Manager server is running on port ${PORT}`);
     });
   });

@@ -1,5 +1,5 @@
 let mongoose = require("mongoose");
-let db = require("../models/Stores");
+let db = require("../models/");
 
 mongoose.connect("mongodb://localhost/retailstores", {
   useNewUrlParser: true,
@@ -10,68 +10,65 @@ mongoose.connect("mongodb://localhost/retailstores", {
 
 let storesSeed = [
   {
-    locations: [
+    name: "NorthEast",
+    inventory: [
       {
-        name: "NorthEast",
-        inventory: [
-          {
-            item: "Ketchup",
-            price: 3.15,
-            quantity: 10,
-          },
-          {
-            item: "Milk",
-            price: 2.6,
-            quantity: 20,
-          },
-          {
-            item: "Apple",
-            price: 4.0,
-            quantity: 50,
-          },
-        ],
+        item: "Ketchup",
+        price: 3.15,
+        quantity: 10,
       },
       {
-        name: "SouthEast",
-        inventory: [
-          {
-            item: "Apple",
-            price: 4.0,
-            quantity: 100,
-          },
-          {
-            item: "Milk",
-            price: 2.6,
-            quantity: 40,
-          },
-        ],
+        item: "Milk",
+        price: 2.6,
+        quantity: 20,
       },
       {
-        name: "SouthWest",
-        inventory: [
-          {
-            item: "Ketchup",
-            price: 3.15,
-            quantity: 20,
-          },
-          {
-            item: "Apple",
-            price: 4.0,
-            quantity: 20,
-          },
-        ],
+        item: "Apple",
+        price: 4.0,
+        quantity: 50,
+      },
+    ],
+  },
+  {
+    name: "SouthEast",
+    inventory: [
+      {
+        item: "Apple",
+        price: 4.0,
+        quantity: 100,
+      },
+      {
+        item: "Milk",
+        price: 2.6,
+        quantity: 40,
+      },
+    ],
+  },
+  {
+    name: "SouthWest",
+    inventory: [
+      {
+        item: "Ketchup",
+        price: 3.15,
+        quantity: 20,
+      },
+      {
+        item: "Apple",
+        price: 4.0,
+        quantity: 20,
       },
     ],
   },
 ];
 
-db.Stores.deleteMany({})
-  .then(() => db.Stores.collection.insertMany(storesSeed))
+//
+db.Store.deleteMany({})
+  .then(() => db.Store.collection.insertMany(storesSeed))
   .then((data) => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.result.n + " stores added to collection.");
     process.exit(0);
   })
   .catch((err) => {
-    console.error(err);
+    console.error("Error encountered: " + err);
     process.exit(1);
   });
