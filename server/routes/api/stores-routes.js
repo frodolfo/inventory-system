@@ -1,8 +1,10 @@
 const router = require("express").Router();
-const Stores = require("../../models/stores");
+const { Stores } = require("../../models/Stores");
 
 router.get("/", (req, res) => {
-  Stores.find()
+  console.log("Retrieving list of stores...");
+  console.log("Stores: ", Stores);
+  Stores.find({})
     .then((data) => {
       res.json(data);
     })
