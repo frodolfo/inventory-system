@@ -26,10 +26,13 @@ const StoreSchema = new Schema(
   }
 );
 
-// StoreSchema.virtual("addProduct").set((product) =>
-//   this.inventory.push(product)
-// );
-// StoreSchema.virtual("totalInventory").get(() => this.inventory.length);
+// Helper methods
+StoreSchema.virtual("addProduct").set(function (product) {
+  this.inventory.push(product);
+});
+StoreSchema.virtual("totalInventory").get(function () {
+  return this.inventory.length;
+});
 
 const Store = mongoose.model("Store", StoreSchema);
 
