@@ -32,7 +32,7 @@ const SearchResults = ({ results, resultsTotal }) => {
             </TableHead>
             <TableBody>
               {results.map((result) => (
-                <TableRow key={result.store}>
+                <TableRow key={result.store + result.product.item}>
                   <TableCell>{result.store}</TableCell>
                   <TableCell>{result.product.item}</TableCell>
                   <TableCell align="right">

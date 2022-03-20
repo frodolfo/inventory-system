@@ -35,20 +35,33 @@ const SearchForm = ({ stores, searchCallback, clearCallback }) => {
       let product;
       let totalPrice = 0;
 
-      for (const store of dataStore) {
-        product = store.inventory.find(
-          (i) => i.item.toLowerCase() === productName.toLowerCase()
-        );
-
-        if (product) {
-          totalPrice += product.price * product.quantity;
-          products.push({
-            store: store.name,
-            product,
-          });
+      if (!productName) {
+        for (const store of dataStore) {
+          for (const product of store.inventory) {
+            totalPrice += product.price * product.quantity;
+            products.push({
+              store: store.name,
+              product,
+            });
+          }
         }
+        searchCallback(products, totalPrice);
+      } else {
+        for (const store of dataStore) {
+          product = store.inventory.find(
+            (i) => i.item.toLowerCase() === productName.toLowerCase()
+          );
+
+          if (product) {
+            totalPrice += product.price * product.quantity;
+            products.push({
+              store: store.name,
+              product,
+            });
+          }
+        }
+        searchCallback(products, totalPrice);
       }
-      searchCallback(products, totalPrice);
     } catch (err) {
       console.log(err);
     }
