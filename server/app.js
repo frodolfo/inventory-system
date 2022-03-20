@@ -1,21 +1,15 @@
 const express = require("express");
-const morgan = require("morgan");
+const logger = require("morgan");
 const mongoose = require("mongoose");
-// TODO: uncomment out line below once db issue is resolved
 const routes = require("./routes");
 
 const PORT = process.env.PORT || 3001;
 const APP = express();
 
-APP.use(morgan("dev"));
-
 APP.use(express.urlencoded({ extended: true }));
 APP.use(express.json());
-// APP.use(express.static("public"));
-// TODO: uncomment out line below once db issue is resolved
-// APP.use(routes);
-// TODO: delete line below once db issue is resolved
-require("./routes/api-routes")(APP);
+APP.use(routes);
+APP.use(logger("dev"));
 
 mongoose
   .connect(process.env.MONGODB_URI || "mongodb://localhost/retailstores", {

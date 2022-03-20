@@ -28,6 +28,7 @@ let storesSeed = [
         quantity: 50,
       },
     ],
+    createDate: Date.now(),
   },
   {
     name: "SouthEast",
@@ -43,6 +44,7 @@ let storesSeed = [
         quantity: 40,
       },
     ],
+    createDate: Date.now(),
   },
   {
     name: "SouthWest",
@@ -58,6 +60,7 @@ let storesSeed = [
         quantity: 20,
       },
     ],
+    createDate: Date.now(),
   },
 ];
 

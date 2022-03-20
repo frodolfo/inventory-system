@@ -8,23 +8,18 @@ import Typography from "@mui/material/Typography";
 
 import { Navigation } from "../components/";
 
-import axios from "axios";
-import { ClassNames } from "@emotion/react";
-
 const Locations = (props) => {
   const [locations, setLocations] = useState([]);
 
   const getStores = async () => {
-    // const stores = await axios.get("/api/store/");
-    // if (Array.isArray(stores)) {
-    //   setLocations([...stores]);
-    // }
     let res, stores;
     try {
-      res = await fetch("/api/store/");
-      console.log("res: ", res);
+      res = await fetch("/api/stores/");
       stores = await res.json();
-      console.log("stores: ", stores.body);
+      if (Array.isArray(stores)) {
+        console.log("stores: ", stores);
+        setLocations([...stores]);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -44,10 +39,10 @@ const Locations = (props) => {
           </Typography>
           <List>
             {locations.map((location) => (
-              <ListItem>
+              <ListItem key={location.name}>
                 <ListItemText
                   primary={location.name}
-                  secondary={"Inventory total:" + location.inventory.length}
+                  secondary={"Inventory total: " + location.inventory.length}
                 />
               </ListItem>
             ))}
