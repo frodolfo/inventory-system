@@ -50,6 +50,11 @@ const Home = (props) => {
           <li>Validation of input data and data types isn't performed</li>
           <li>You can only add new products</li>
           <li>Product deletion isn't implemented</li>
+          <li>API access isn't protected by a security token</li>
+          <li>
+            The useContext hook would have eliminted the need to query the
+            stores collection 3 separate times
+          </li>
         </ul>
       </p>
     </Box>
