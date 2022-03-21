@@ -35,6 +35,9 @@ const SearchForm = ({ stores, searchCallback, clearCallback }) => {
       let product;
       let totalPrice = 0;
 
+      // Ensure we always have the latest
+      getStores();
+
       if (!productName) {
         for (const store of dataStore) {
           for (const product of store.inventory) {

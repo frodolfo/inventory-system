@@ -18,45 +18,38 @@ const Home = (props) => {
         the number of items, and the monetary value of a given item for a single
         location or all locations.
       </p>
-      <p>
-        This prototype fulfills three main components:
-        <ul>
-          <li>Create an API to serve the data. (localhost)</li>
-          <li>Create a simple React application that can solve the problem</li>
-          <li>A persistent data storage layer</li>
-        </ul>
-      </p>
+      <p>This prototype fulfills three main components:</p>
+      <ul>
+        <li>Create an API to serve the data. (localhost)</li>
+        <li>Create a simple React application that can solve the problem</li>
+        <li>A persistent data storage layer</li>
+      </ul>
       <p>
         For example, Ketchup can be an item that costs $5.00 per unit.  The
         NorthEast location has 2 units totaling $10.00 and the SouthEast
         location has 4 units totaling $20.00.  The total value of Ketchup is 6
         bottles and $30.
       </p>
-      <p>
-        <Typography variant="h6">Constraints:</Typography>
-        <ul>
-          <li>The data must be persistent</li>
-          <li>The frontend must be written in React + Material UI</li>
-        </ul>
-      </p>
-      <p>
-        <Typography variant="h6">Caveats:</Typography>
-        <ul>
-          <li>I did not use best practices for the overall layout</li>
-          <li>
-            The primary focus for this case is the implementation of
-            requirements
-          </li>
-          <li>Validation of input data and data types isn't performed</li>
-          <li>You can only add new products</li>
-          <li>Product deletion isn't implemented</li>
-          <li>API access isn't protected by a security token</li>
-          <li>
-            The useContext hook would have eliminted the need to query the
-            stores collection 3 separate times
-          </li>
-        </ul>
-      </p>
+      <Typography variant="h6">Constraints:</Typography>
+      <ul>
+        <li>The data must be persistent</li>
+        <li>The frontend must be written in React + Material UI</li>
+      </ul>{" "}
+      <Typography variant="h6">Caveats:</Typography>
+      <ul>
+        <li>I did not use best practices for the overall layout</li>
+        <li>
+          The primary focus for this case is the implementation of requirements
+        </li>
+        <li>Validation of input data and data types isn't performed</li>
+        <li>You can only add new products</li>
+        <li>Product deletion isn't implemented</li>
+        <li>API access isn't protected by a security token</li>
+        <li>
+          The useContext hook would have eliminted the need to query the stores
+          collection 3 separate times
+        </li>
+      </ul>
     </Box>
   );
 };

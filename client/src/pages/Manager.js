@@ -1,13 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Box, Grid, Snackbar, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Grid,
+  Modal,
+  Snackbar,
+  Typography,
+} from "@mui/material";
 import {
   AddForm,
   CollapsibleTable,
-  CustomAccordion,
   Navigation,
   SearchForm,
   SearchResults,
 } from "../components";
+
+const modalStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const Manager = (props) => {
   const [locations, setLocations] = useState([]);
@@ -15,6 +34,9 @@ const Manager = (props) => {
   const [inventoryTotal, setInventoryTotal] = useState(0.0);
   const [successOpen, setSuccessOpen] = useState(false);
   const [failureOpen, setFailureOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const handleModalOpen = () => setModalOpen(true);
+  const handleModalClose = () => setModalOpen(false);
 
   const getStores = async () => {
     let res, stores;
@@ -125,9 +147,30 @@ const Manager = (props) => {
             clearCallback={clearResultsCallback}
           />
           <Grid item xs={12} md={12}>
-            <CustomAccordion title="Product Manager">
-              <AddForm stores={locations} addCallback={addProductCallback} />
-            </CustomAccordion>
+            <Box sx={{ mt: 2 }}>
+              <Button
+                sx={{ mr: 2 }}
+                size="small"
+                variant="outlined"
+                color="info"
+                onClick={handleModalOpen}
+              >
+                Add Product
+              </Button>
+            </Box>
+            <Modal
+              open={modalOpen}
+              onClose={handleModalClose}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={modalStyle}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Add Product
+                </Typography>
+                <AddForm stores={locations} addCallback={addProductCallback} />
+              </Box>
+            </Modal>
           </Grid>
           <SearchResults
             results={searchResults}

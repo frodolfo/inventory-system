@@ -19,14 +19,6 @@ router.post("/", (req, res) => {
     });
 });
 
-router.get("/:name", (req, res) => {
-  db.Store.find()
-    .then((data) => {
-      res.json(data);
-    })
-    .catch((err) => res.json(err));
-});
-
 router.put("/:id", ({ body, params }, res) => {
   db.Store.findByIdAndUpdate(
     params.id,
