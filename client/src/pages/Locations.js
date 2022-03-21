@@ -3,6 +3,7 @@ import { Alert, Box, Grid, Snackbar, Typography } from "@mui/material";
 import {
   AddForm,
   CollapsibleTable,
+  CustomAccordion,
   Navigation,
   SearchForm,
   SearchResults,
@@ -113,7 +114,6 @@ const Locations = (props) => {
           </Alert>
         </Snackbar>
       </Box>
-
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
@@ -125,10 +125,13 @@ const Locations = (props) => {
             clearCallback={clearResultsCallback}
           />
           <Grid item xs={12} md={12}>
-            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+            <CustomAccordion title="Product Manager">
+              <AddForm stores={locations} addCallback={addProductCallback} />
+            </CustomAccordion>
+            {/* <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
               Product Manager
             </Typography>
-            <AddForm stores={locations} addCallback={addProductCallback} />
+            <AddForm stores={locations} addCallback={addProductCallback} /> */}
           </Grid>
           <SearchResults
             results={searchResults}
