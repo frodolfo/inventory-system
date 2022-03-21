@@ -1,30 +1,30 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
+import {
+  AppBar,
+  Avatar,
+  Box,
+  Button,
+  Container,
+  IconButton,
+  Menu,
+  MenuItem,
+  Toolbar,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import MenuItem from "@mui/material/MenuItem";
+
+import myAvatar from "../../assets/images/Fred_Solo.png";
 
 const pages = [
   {
-    name: "Locations",
-    url: "/locations",
+    name: "Manager",
+    url: "/manager",
   },
   {
-    name: "Products",
-    url: "/",
-  },
-  {
-    name: "Contact Us",
-    url: "/",
+    name: "Github",
+    url: "/github",
   },
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
@@ -59,9 +59,14 @@ const Navigation = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            onClick={() => handleCloseNavMenu("/")}
+            sx={{
+              cursor: "pointer",
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+            }}
           >
-            LOGO
+            Home
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -126,7 +131,7 @@ const Navigation = () => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Fred Rodolfo" src="" />
+                <Avatar alt="Fred Rodolfo" src={myAvatar} />
               </IconButton>
             </Tooltip>
             <Menu

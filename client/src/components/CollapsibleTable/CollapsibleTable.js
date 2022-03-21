@@ -21,7 +21,7 @@ export default function CollapsibleTable(props) {
           <TableRow>
             <TableCell />
             <TableCell>Location</TableCell>
-            <TableCell align="right">Total Inventory</TableCell>
+            <TableCell align="right">Product Types</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

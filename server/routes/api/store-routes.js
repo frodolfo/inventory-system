@@ -28,10 +28,6 @@ router.get("/:name", (req, res) => {
 });
 
 router.put("/:id", ({ body, params }, res) => {
-  // TODO: delete these
-  console.log("id: ", params.id);
-  console.table(body);
-
   db.Store.findByIdAndUpdate(
     params.id,
     { $push: { inventory: body } },

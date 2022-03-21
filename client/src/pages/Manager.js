@@ -7,9 +7,9 @@ import {
   Navigation,
   SearchForm,
   SearchResults,
-} from "../components/";
+} from "../components";
 
-const Locations = (props) => {
+const Manager = (props) => {
   const [locations, setLocations] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [inventoryTotal, setInventoryTotal] = useState(0.0);
@@ -128,10 +128,6 @@ const Locations = (props) => {
             <CustomAccordion title="Product Manager">
               <AddForm stores={locations} addCallback={addProductCallback} />
             </CustomAccordion>
-            {/* <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-              Product Manager
-            </Typography>
-            <AddForm stores={locations} addCallback={addProductCallback} /> */}
           </Grid>
           <SearchResults
             results={searchResults}
@@ -149,4 +145,4 @@ const Locations = (props) => {
   );
 };
 
-export default Locations;
+export default Manager;
