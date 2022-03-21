@@ -20,7 +20,7 @@ router.post("/", (req, res) => {
 });
 
 router.get("/:name", (req, res) => {
-  db.Store.find({ item: req.params.name })
+  db.Store.find()
     .then((data) => {
       res.json(data);
     })
@@ -28,6 +28,10 @@ router.get("/:name", (req, res) => {
 });
 
 router.put("/:id", ({ body, params }, res) => {
+  // TODO: delete these
+  console.log("id: ", params.id);
+  console.table(body);
+
   db.Store.findByIdAndUpdate(
     params.id,
     { $push: { inventory: body } },
