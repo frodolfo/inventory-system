@@ -1,32 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, Grid, TextField } from "@mui/material";
+
+import StoreContext from "../../context/StoreContext";
 
 const defaultValues = {
   item: "",
 };
 
-const SearchForm = ({ stores, searchCallback, clearCallback }) => {
-  const [dataStore, setDataStore] = useState(stores);
+const SearchForm = ({ searchCallback, clearCallback }) => {
+  const [dataStore, setDataStore] = useState([]);
   const [formValues, setFormValues] = useState(defaultValues);
-
   const textInput = React.useRef(null);
 
-  const getStores = async () => {
-    let res, locations;
-    try {
-      res = await fetch("/api/stores/");
-      locations = await res.json();
-      if (Array.isArray(locations)) {
-        setDataStore([...locations]);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const contextValue = useContext(StoreContext);
 
   useEffect(() => {
-    getStores();
-  }, []);
+    setDataStore([...contextValue]);
+  }, [contextValue]);
 
   const findProduct = async (productName) => {
     let products = [];
@@ -34,9 +24,6 @@ const SearchForm = ({ stores, searchCallback, clearCallback }) => {
     try {
       let product;
       let totalPrice = 0;
-
-      // Ensure we always have the latest
-      getStores();
 
       if (!productName) {
         for (const store of dataStore) {

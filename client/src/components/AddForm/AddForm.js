@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Alert,
   Box,
@@ -12,6 +12,8 @@ import {
   TextField,
 } from "@mui/material";
 
+import StoreContext from "../../context/StoreContext";
+
 const defaultValues = {
   id: "",
   location: "",
@@ -20,30 +22,18 @@ const defaultValues = {
   quantity: 0,
 };
 
-const AddForm = ({ stores, addCallback }) => {
+const AddForm = ({ stores, addCallback, modalCloseCallback }) => {
   const [dataStore, setDataStore] = useState(stores);
   const [formValues, setFormValues] = useState(defaultValues);
   const [successOpen, setSuccessOpen] = useState(false);
   const [failureOpen, setFailureOpen] = useState(false);
 
   const textInput = React.useRef(null);
-
-  const getStores = async () => {
-    let res, locations;
-    try {
-      res = await fetch("/api/stores/");
-      locations = await res.json();
-      if (Array.isArray(locations)) {
-        setDataStore([...locations]);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const contextValue = useContext(StoreContext);
 
   useEffect(() => {
-    getStores();
-  }, []);
+    setDataStore([...contextValue]);
+  }, [contextValue]);
 
   const checkProduct = (product) => {
     let selectedStore = dataStore.find((store) => {
@@ -92,6 +82,10 @@ const AddForm = ({ stores, addCallback }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     addProduct(formValues);
+  };
+
+  const handleCancel = (event) => {
+    modalCloseCallback();
   };
 
   return (
@@ -182,6 +176,13 @@ const AddForm = ({ stores, addCallback }) => {
               type="submit"
             >
               Add
+            </Button>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={handleCancel}
+            >
+              Cancel
             </Button>
           </Box>
         </Grid>

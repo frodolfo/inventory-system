@@ -16,6 +16,8 @@ import {
   SearchResults,
 } from "../components";
 
+import StoreContext from "../context/StoreContext";
+
 const modalStyle = {
   position: "absolute",
   top: "50%",
@@ -114,77 +116,86 @@ const Manager = (props) => {
   }, []);
 
   return (
-    <Box component="div">
-      <Navigation />
-      <Box sx={{ margin: "5px 0 15px" }}>
-        <Snackbar
-          open={successOpen}
-          autoHideDuration={4000}
-          onClose={handleClose}
-        >
-          <Alert severity="success" sx={{ width: "320px" }}>
-            Product has been added successfully.
-          </Alert>
-        </Snackbar>
-        <Snackbar
-          open={failureOpen}
-          autoHideDuration={4000}
-          onClose={handleClose}
-        >
-          <Alert severity="error" sx={{ width: "320px" }}>
-            Uh-oh, an error was encountered.
-          </Alert>
-        </Snackbar>
-      </Box>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Inventory Manager
-          </Typography>
-          <SearchForm
-            stores={locations}
-            searchCallback={searchResultsCallback}
-            clearCallback={clearResultsCallback}
-          />
-          <Grid item xs={12} md={12}>
-            <Box sx={{ mt: 2 }}>
-              <Button
-                sx={{ mr: 2 }}
-                size="small"
-                variant="outlined"
-                color="info"
-                onClick={handleModalOpen}
-              >
-                Add Product
-              </Button>
-            </Box>
-            <Modal
-              open={modalOpen}
-              onClose={handleModalClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={modalStyle}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
+    <StoreContext.Provider value={locations}>
+      <Box component="div">
+        <Navigation />
+        <Box sx={{ margin: "5px 0 15px" }}>
+          <Snackbar
+            open={successOpen}
+            autoHideDuration={4000}
+            onClose={handleClose}
+          >
+            <Alert severity="success" sx={{ width: "320px" }}>
+              Product has been added successfully.
+            </Alert>
+          </Snackbar>
+          <Snackbar
+            open={failureOpen}
+            autoHideDuration={4000}
+            onClose={handleClose}
+          >
+            <Alert severity="error" sx={{ width: "320px" }}>
+              Uh-oh, an error was encountered.
+            </Alert>
+          </Snackbar>
+        </Box>
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+              Inventory Manager
+            </Typography>
+            <SearchForm
+              searchCallback={searchResultsCallback}
+              clearCallback={clearResultsCallback}
+            />
+            <Grid item xs={12} md={12}>
+              <Box sx={{ mt: 2 }}>
+                <Button
+                  sx={{ mr: 2 }}
+                  size="small"
+                  variant="outlined"
+                  color="info"
+                  onClick={handleModalOpen}
+                >
                   Add Product
-                </Typography>
-                <AddForm stores={locations} addCallback={addProductCallback} />
+                </Button>
               </Box>
-            </Modal>
+              <Modal
+                open={modalOpen}
+                onClose={handleModalClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={modalStyle}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Add Product
+                  </Typography>
+                  <AddForm
+                    stores={locations}
+                    addCallback={addProductCallback}
+                    modalCloseCallback={handleModalClose}
+                  />
+                </Box>
+              </Modal>
+            </Grid>
+            <SearchResults
+              results={searchResults}
+              resultsTotal={inventoryTotal}
+            />
           </Grid>
-          <SearchResults
-            results={searchResults}
-            resultsTotal={inventoryTotal}
-          />
+          <Grid item xs={12} md={6}>
+            <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+              Store Locations
+            </Typography>
+            <CollapsibleTable rows={locations} />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-            Store Locations
-          </Typography>
-          <CollapsibleTable rows={locations} />
-        </Grid>
-      </Grid>
-    </Box>
+      </Box>
+    </StoreContext.Provider>
   );
 };
 
