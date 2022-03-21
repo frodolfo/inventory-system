@@ -7,6 +7,7 @@ import {
   Button,
   Container,
   IconButton,
+  Link,
   Menu,
   MenuItem,
   Toolbar,
@@ -27,7 +28,16 @@ const pages = [
     url: "/github",
   },
 ];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = [
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/fredrodolfo/",
+  },
+  {
+    name: "GitHub",
+    url: "https://github.com/frodolfo",
+  },
+];
 
 const Navigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -47,7 +57,8 @@ const Navigation = () => {
     navigate(url);
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (e) => {
+    e.preventDefault();
     setAnchorElUser(null);
   };
 
@@ -151,8 +162,15 @@ const Navigation = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem key={setting.name}>
+                  <Link
+                    href={setting.url}
+                    underline="none"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Typography textAlign="center">{setting.name}</Typography>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
